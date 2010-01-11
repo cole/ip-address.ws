@@ -1,10 +1,8 @@
 <?php 
 
-/* IP-address.ws v0.4
+/* IP-address.ws v0.5
     © 2009 Cole Maclean
     
-    TODOs:
-    -write good user agent parser http://www.user-agents.org/allagents.xml
 */
 
 /*
@@ -21,14 +19,31 @@ $start = utime();
  
 require 'strings.php';
 
-$i18n = new Strings($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-
 // Route the request - choose page and format based on the URI
 if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] != '/')) {
-    $params = explode('.', substr($_SERVER['REQUEST_URI'], 1));
-    $page = $params[0];
-    $format = $params[1];
+    $params1 = explode('.', substr($_SERVER['REQUEST_URI'], 1));
+    $params2 = explode('?', $params1[1]);
+    $params3 = explode('&', $params2[1]);
+    $page = $params1[0];
+    $format = $params2[0];
     
+    // Create out own half-ass version of $_GET 
+    $getvars = array();
+    foreach ($params3 as $getvar) {
+        $arr = explode('=', $getvar);
+        $getvars[$arr[0]] = $arr[1];
+    }
+
+    // If we get a set language in the URL, use it, otherwise guess from the headers
+    if (isset($getvars["lang"]) && preg_match('/([A-Za-z][A-Za-z]|[A-Za-z][A-Za-z]-[A-Za-z][A-Za-z])/',$getvars["lang"])) {
+        $i18n = new Strings();
+        $i18n->languageCode = substr($getvars["lang"], 0, 2);
+    }
+    else {
+        $i18n = new Strings($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+    }
+    
+    // OK, ready to choose a format
     switch ($format) { 
         
         case txt:
@@ -259,7 +274,7 @@ END;
                     
                 default:
                     header("HTTP/1.1 404 Not Found");
-                    header('Content-Type: text/css');
+                    header('Content-Type: text/plain');
                     echo $i18n->t('404').' 404';
                     break;
             }
@@ -283,6 +298,7 @@ END;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -291,7 +307,6 @@ END;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -322,6 +337,7 @@ HTML;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -330,7 +346,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -361,6 +376,7 @@ HTML;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -369,7 +385,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -400,6 +415,7 @@ HTML;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -408,7 +424,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -436,6 +451,7 @@ HTML;
     <title>IP-address.ws - About</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -449,7 +465,6 @@ HTML;
             <li><a href="http://$host/useragent.html">Useragent</a> (<a href="http://$host/useragent.xml">XML</a>, <a href="http://$host/useragent.txt">Text</a>, <a href="http://$host/useragent.json">JSON</a>)</li>
         </ul>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -482,6 +497,7 @@ HTML;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -490,7 +506,6 @@ HTML;
                 <span class="data">404</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -524,6 +539,7 @@ HTML;
     <title>IP-address.ws</title>
     <link rel="stylesheet" type="text/css" media="screen and (min-device-width: 600px)" href="screen.css" />
     <link rel="stylesheet" type="text/css" media="handheld, screen and (max-device-width: 480px)" href="iphone.css" />
+    <!-- Curious about this page?  Visit http://$host/about.html -->
 </head>
 <body>
     <div class="box">
@@ -532,7 +548,6 @@ HTML;
                 <span class="data">404</span>
                 <br/>
     </div>
-    <div class="footer"><a href="http://$host/about.html">$about</a></div>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
