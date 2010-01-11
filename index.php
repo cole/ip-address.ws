@@ -2,7 +2,7 @@
 
 /* IP-address.ws v0.5
     © 2009 Cole Maclean
-    
+    TODO: build out template system - remove some duplication
 */
 
 /*
@@ -307,16 +307,6 @@ END;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -346,16 +336,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -385,16 +365,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -424,16 +394,6 @@ HTML;
                 <span class="data">$data</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -465,16 +425,6 @@ HTML;
             <li><a href="http://$host/useragent.html">Useragent</a> (<a href="http://$host/useragent.xml">XML</a>, <a href="http://$host/useragent.txt">Text</a>, <a href="http://$host/useragent.json">JSON</a>)</li>
         </ul>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -506,16 +456,6 @@ HTML;
                 <span class="data">404</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
@@ -548,16 +488,6 @@ HTML;
                 <span class="data">404</span>
                 <br/>
     </div>
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        try {
-            var pageTracker = _gat._getTracker("UA-292915-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-    </script>
 </body>
 </html>
 HTML;
