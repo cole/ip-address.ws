@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+
+    RewriteCond %{HTTP_HOST} ^www\.ip-address\.ws$
+    RewriteRule (.*) http://ip-address.ws/$1 [R=Permanent]
+
+    RewriteRule . index.php [L,NC]
+</IfModule>

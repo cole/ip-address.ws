@@ -4,8 +4,22 @@ class Strings {
 
     // Localization strings
     private $messages = array (
-        'ar' => array('langcode' => 'Arabic', 'ip' => 'عنوان بروتوكول الإنترنت هو', 'hostname' => 'اسم المضيف الخاص بك هو :', 'language' => 'سلسلة قبول اللغة الخاصة بك هو :', 'useragent' => 'وكيل المستخدم الخاص بك هو سلسلة :', 'browser' => 'متصفحك يبدو أن:'),
-        'bg' => array('langcode' => 'Bulgarian', 'ip' => 'Вашият IP адрес е:', 'hostname' => 'Вашият хост е:', 'language' => 'ви приеме език поредицата е:', 'useragent' => 'вашето потребителско агент стринг е:', 'browser' => 'Вашият браузър изглежда е:', '404' => ' Опа! '),
+      'default' => array('title' => 'IP-address.ws', 'langcode' => 'Default', 'ip' => 'Your IP address is:', 'hostname' => 'Your hostname is:', 'language' => 'Your accept language string is:', 'useragent' => 'Your user agent string is:', 'browser' => 'Your browser appears to be:', '404' => 'Oops!', 'about' => 'About'),
+      
+        'ar' => array(
+          'langcode' => 'Arabic', 
+          'ip' => 'عنوان بروتوكول الإنترنت هو', 
+          'hostname' => 'اسم المضيف الخاص بك هو :', 
+          'language' => 'سلسلة قبول اللغة الخاصة بك هو :', 
+          'useragent' => 'وكيل المستخدم الخاص بك هو سلسلة :', 
+          'browser' => 'متصفحك يبدو أن:'),
+        'bg' => array(
+          'langcode' => 'Bulgarian', 
+          'ip' => 'Вашият IP адрес е:', 
+          'hostname' => 'Вашият хост е:', 
+          'language' => 'ви приеме език поредицата е:', 
+          'useragent' => 'вашето потребителско агент стринг е:', 
+          'browser' => 'Вашият браузър изглежда е:', '404' => ' Опа! '),
         'ca' => array('langcode' => 'Catalan', 'ip' => 'La seva adreça IP és:', 'hostname' => 'El nom de host és:', 'language' => 'L\'idioma acceptat cadena és', 'useragent' => 'El seu agent d\'usuari de la cadena és:', 'browser' => 'El seu navegador sembla ser: ', '404' => 'Vaja!'),
         'cs' => array('langcode' => 'Czech', 'ip' => 'Vaše IP adresa je:', 'hostname' => 'Vaše jméno je:', 'language' => 'Váš jazyk akceptovat řetězec:', 'useragent' => 'Your user agent řetězec:', 'browser' => 'Váš prohlížeč zdá být:', '404' => ' Jejda! '),
         'da' => array('langcode' => 'Danish', 'ip' => 'Din IP-adresse er:', 'hostname' => 'Dit værtsnavn er:', 'language' => 'Din acceptere sprog strengen er:', 'useragent' => ' Din bruger agent-strengen er:', 'browser' => ' Din browser ser ud til at være:', '404' => 'Ups!'),
@@ -99,9 +113,9 @@ class Strings {
         
         if (isset($this->messages[$lang][$key])) {
             return $this->messages[$lang][$key];
-        } 
-        else if (isset($this->messages[en][$key])) {
-            return $this->messages[en][$key];
+        }
+        else if (isset($this->messages['default'][$key])) {
+            return $this->messages['default'][$key];
         }
         else {
             error_log("Translation error: LANG: "."$lang, message: '$key'");
