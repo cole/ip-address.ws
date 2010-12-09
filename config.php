@@ -8,6 +8,6 @@ define("TEMPLATEPATH","templates");
 define("STATICPATH","static");
 define("STATICCACHETIME","1209600"); // 2 weeks
 define("CACHETIME","60");
-define("DEBUG",true);
+define("DEBUG",false);
 
 ?>
