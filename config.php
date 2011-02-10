@@ -9,5 +9,5 @@ define("STATICPATH","static");
 define("VERSION","0.6");
 define("STATICCACHETIME","1209600"); // 2 weeks
 define("CACHETIME","0");
-define("DEBUG",true);
+define("DEBUG",false);
 
