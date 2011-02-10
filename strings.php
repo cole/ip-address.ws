@@ -1,20 +1,11 @@
 <?php
 class Strings {
-    public $languageCode = '';
+    public $language_code;
+    // Set a 'default' language in case of missing strings
+    public $fallback_language = 'en';
 
     // Localization strings
     private $messages = array (
-        'default' => array(
-          'version' => VERSION,
-          'title' => 'IP-address.ws',
-          'langcode' => 'Default',
-          'ip' => 'Your IP address is:',
-          'hostname' => 'Your hostname is:',
-          'language' => 'Your accept language string is:',
-          'useragent' => 'Your user agent string is:',
-          'browser' => 'Your browser appears to be:',
-          '404' => 'Oops!',
-          'about' => 'About'),
         'ar' => array(
           'langcode' => 'Arabic', 
           'ip' => 'عنوان بروتوكول الإنترنت هو', 
@@ -70,6 +61,8 @@ class Strings {
           'browser' => 'Το πρόγραμμά σας περιήγησης φαίνεται να να είναι:',
           '404' => 'Ωχ!'),
         'en' => array(
+          'version' => VERSION,
+          'title' => 'IP-address.ws',
           'langcode' => 'English',
           'ip' => 'Your IP address is:',
           'hostname' => 'Your hostname is:',
@@ -229,19 +222,25 @@ class Strings {
           '404' => '哎呀！')
         );
         
-
-    public function __construct($httpacceptlang = '')
-    {                
-        $this->languageCode = $this->_parseAcceptLang($httpacceptlang);
+    public function __construct($lang_param = '',$http_accept_lang = '')
+    {   
+        if (preg_match('/([A-Za-z]{2}|[A-Za-z]{2}-[A-Za-z]{2})/',$lang_param)) {
+          $this->language_code = $lang_param;
+        }
+        else {
+          $this->language_code = $this->_parseAcceptLang($http_accept_lang);
+        }
+        
     }
     
-    private function _parseAcceptLang($acceptLang) 
+    private function _parseAcceptLang($accept_lang) 
     {
+      // XXX: This function is a bit of a mess...clean it up.
         $langs = array();
         
-        if ($acceptLang != '') {
+        if ($accept_lang != '') {
             // break up string into pieces (languages and q factors)
-            preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $acceptLang, $langParse);
+            preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $accept_lang, $langParse);
 
             if (count($langParse[1])) {
                 // create a list like "en" => 0.8
@@ -258,6 +257,15 @@ class Strings {
             
             // check each languange in turn.  
             foreach ($langs as $lang => $val) {
+                $choice = array_key_exists($lang,$this->messages);
+                if ($choice === TRUE) {
+                    return $lang;
+                    break;
+                }
+            }
+            
+            // check each languange in turn, this time discarding the regional setting
+            foreach ($langs as $lang => $val) {
                 $lang = substr($lang, 0, 2); // Only check the first two chars as we don't care about region
                 $choice = array_key_exists($lang,$this->messages);
                 if ($choice === TRUE) {
@@ -265,29 +273,37 @@ class Strings {
                     break;
                 }
             }
-            return 'en'; //nothing found, return English.
+            
+            return $this->fallback_language; //nothing found, return fallback.
             break;
         }
         else {
-            return 'en'; //no language requested, return English.
+            return $this->fallback_language; //no language requested, return fallback.
         }
     }
     
     public function t($key, $lang = '') 
-    {
-        if ($lang === '') {
-            $lang = $this->languageCode;
+    {   
+        if (empty($lang))
+        {
+          $lang = $this->language_code;
         }
         
         if (isset($this->messages[$lang][$key])) {
             return $this->messages[$lang][$key];
         }
-        else if (isset($this->messages['default'][$key])) {
-            return $this->messages['default'][$key];
+        else if (DEBUG) {
+          error_log("Translation error: LANG: "."$lang, message: '$key'");
+          return "Translation missing: $lang, $key";
+        }
+        else if (isset($this->messages[substr($lang,0,2)][$key])) {
+            return $this->messages[$lang][$key];
+        }
+        else if (isset($this->messages[$this->fallback_language][$key])) {
+            return $this->messages[$this->fallback_language][$key];
         }
         else {
             error_log("Translation error: LANG: "."$lang, message: '$key'");
         }
     }
 }
-?>
