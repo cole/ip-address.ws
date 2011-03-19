@@ -1,0 +1,25 @@
+/* Main stylesheet
+ * basically just imports other files in order
+ *
+ * most things taken from: https://github.com/paulirish/html5-boilerplate/
+ * revised to use lesscss: http://lesscss.org/
+ *
+ * Copyright 2011 Cole Maclean
+ *
+ */
+ 
+ /* scalable pixels - required for fluid layout of other styles */
+ @default-font-size: 16; 
+ @default-line-height: 18; 
+ @1px: 1em / @default-font-size;
+
+ @import "colors.less";     /* color variables – ALL colors should go here */
+ @import "mixins.less";     /* utility functions and templates - should not produce output */
+ @import "base.less";       /* reset styles */
+ @import "text.less";       /* typography */
+ @import "layout.less";     /* grid and positioning */
+ @import "site.less";       /* the heart of the operation */
+ @import "helpers.less";    /* clearfix, hidden, etc */
+ @import "media.less";      /* media queries */
+ @import "print.less";      /* simple print styles */
+ 

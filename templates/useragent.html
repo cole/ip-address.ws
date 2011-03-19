@@ -1,8 +1,7 @@
-{% include '_header.html' %}
-    <div class="box">
-                <span class="preamble">&nbsp;&nbsp;[[useragent]]</span>
-                <br/>
-                <span class="data">{{useragent}}</span>
-                <br/>
+{{> _header }}
+    			<div class="box">
+                <div class="preamble">{{_i useragent}}</div>
+                <div class="data">{{useragent}}</div>
+				<div class="clearfix"></div>
     </div>
-{% include '_footer.html' %}
+{{> _footer }}

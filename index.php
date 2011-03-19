@@ -1,43 +1,57 @@
 <?php 
 
-/* IP-address.ws v0.6
-    © 2011 Cole Maclean
+/* IP-address.ws v0.7
+© 2011 Cole Maclean
 */
 
-require 'config.php';
+define("VERSION","0.7");
+define("DEBUG",false);
 
 if (DEBUG) {
-  require 'timer.php';
-  $timer = new Timer();
+    require 'includes/timer.php';
+    $timer = new Timer();
 }
 
-require 'router.php';
-require 'template.php';
-require 'strings.php';
+require 'includes/router.php';
+require 'includes/strings.php';
 
-$data = array(
-    "ip" => $_SERVER['REMOTE_ADDR'],
-    "hostname" => gethostbyaddr($_SERVER['REMOTE_ADDR']),
-    "language" => $_SERVER['HTTP_ACCEPT_LANGUAGE'],
-    "useragent" => $_SERVER['HTTP_USER_AGENT'],
-    "host" => $_SERVER['HTTP_HOST'],
-    "analytics_code" => ANALYTICS_CODE,
-    'langcode' => ''
+if (isset($_SERVER['REQUEST_URI']))
+    $request_uri = $_SERVER['REQUEST_URI'];
+else
+    $request_uri = '';
+
+$router = new Router($request_uri);
+
+$router->template_vars = array(
+    "ip" => '',
+    "hostname" => '',
+    "language" => '',
+    "useragent" => '',
+    "host" => '',
+    'langcode' => '',
     );
 
-$router = new Router($_SERVER['REQUEST_URI']);
+if (isset($_SERVER['REMOTE_ADDR'])) {
+    $router->template_vars["ip"] = $_SERVER['REMOTE_ADDR'];
+    $router->template_vars["hostname"] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+}
 
-$i18n = new Strings($router->query_vars[lang],$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+    $router->template_vars["language"] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+    
+if (isset($_SERVER['HTTP_USER_AGENT']))
+    $router->template_vars["useragent"] = $_SERVER['HTTP_USER_AGENT'];
+    
+if (isset($_SERVER['HTTP_HOST']))
+    $router->template_vars["host"] = $_SERVER['HTTP_HOST'];
+
+$i18n = new Strings($router->query_vars['lang'], $router->template_vars['language'], true);
 
 // Set the language code so we can output it in HTML
-$data['langcode'] = $i18n->language_code;
-
-$output = new Template();
-$output->strings = &$i18n;
-$output->data = &$data;
-$output->render($router->page, $router->format);
+$router->template_vars['langcode'] = $i18n->language_code;
+// Render the page, with a callback to flush the translation buffer
+$router->render(array($i18n,'flush'));
 
 if (DEBUG) {
-  echo $timer->results();
-  echo $i18n->language_code;
+    echo $timer->results();
 }

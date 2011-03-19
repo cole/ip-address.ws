@@ -1,8 +1,7 @@
-{% include '_header.html' %}
-    <div class="box">
-                <span class="preamble">&nbsp;&nbsp;[[404]]</span>
-                <br/>
-                <span class="data">404</span>
-                <br/>
+{{> _header }}
+    			<div class="box">
+                <div class="preamble">{{_i 404}}</div>
+                <div class="data">404</div>
+				<div class="clearfix"></div>
     </div>
-{% include '_footer.html' %}
+{{> _footer }}
