@@ -1,14 +1,6 @@
-ErrorDocument 404 /404.html
-
 # Cache static files for 1 week
 <FilesMatch ".(js|css|png|jpeg|ini)$">
     Header set Cache-Control "max-age=604800"
-</FilesMatch>
-
-# Deny files we don't want to share
-<FilesMatch "\.(log|sh|php|phps|less)$">
-    Order Allow,Deny
-    Deny from all
 </FilesMatch>
 
 <IfModule mod_rewrite.c>
@@ -19,10 +11,10 @@ ErrorDocument 404 /404.html
     RewriteRule (.*) http://ip-address.ws/$1 [R=Permanent]
 
     # Deny access to subfolders
-	RewriteRule ^/css/(.*) index.php [L,NC]
-	RewriteRule ^/templates/(.*) index.php [L,NC]
-	RewriteRule ^/includes/(.*) index.php [L,NC]
-	RewriteRule ^/tests/(.*) index.php [L,NC]
+	RewriteRule ^css/(.*) index.php [L,NC]
+	RewriteRule ^templates/(.*) index.php [L,NC]
+	RewriteRule ^includes/(.*) index.php [L,NC]
+	RewriteRule ^tests/(.*) index.php [L,NC]
 	
 	# Allow existing files in other folders
 	RewriteCond %{REQUEST_FILENAME} !-f
