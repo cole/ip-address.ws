@@ -96,7 +96,8 @@ class Router {
         // 404 if we can't find the template
         if (!file_exists(dirname(__FILE__).'/../'.Router::$template_path.$this->filepath)) {
             header(Router::protocol() . " 404 Not Found", true, 404); 
-            $this->content_type = $this->getContentType('html');
+            $this->format = 'html';
+            $this->content_type = $this->getContentType($this->format);
             $this->filepath = '/404.html';
             $this->page = '404';
         }
