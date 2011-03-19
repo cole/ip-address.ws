@@ -1,8 +1,7 @@
-{% include '_header.html' %}
+{{> _header }}
     <div class="box">
-                <span class="preamble">&nbsp;&nbsp;[[hostname]]</span>
-                <br/>
-                <span class="data">{{hostname}}</span>
-                <br/>
+                <div class="preamble">{{_i hostname}}</div>
+                <div class="data">{{hostname}}</div>
+				<div class="clearfix"></div>
     </div>
-{% include '_footer.html' %}
+{{> _footer }}

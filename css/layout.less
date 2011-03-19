@@ -1,0 +1,39 @@
+/* A simple fluid grid
+ * www.alistapart.com/articles/fluidgrids/
+ */
+ 
+@column-width: 124; /* pixels */
+@gutter-width: 20; /* pixels */
+@number-of-columns: 7;
+@page-width: (@column-width * @number-of-columns) + (@gutter-width * (@number-of-columns - 1));
+
+#page {
+ margin: (40 * @1px) auto;
+ padding: 0 1em;
+ max-width: @page-width * @1px;
+}
+
+.top-level (@left-margin-columns,@width-in-columns,@parent-width-in-columns: @number-of-columns) {
+    @context-width: (@column-width * @parent-width-in-columns) + (@gutter-width * (@parent-width-in-columns - 1));
+    @left-margin-width: (@left-margin-columns - 1) * (@column-width + @gutter-width);
+    @target-width: (@column-width * @width-in-columns) + (@gutter-width * (@width-in-columns - 1));
+    
+    margin-left: (@left-margin-width / @context-width) * 100%;
+    width: (@target-width / @context-width) * 100%;
+}
+
+.left-column (@width-in-columns, @parent-width-in-columns: @number-of-columns) {
+    @context-width: (@column-width * @parent-width-in-columns) + (@gutter-width * (@parent-width-in-columns - 1));
+    @target-width: (@column-width * @width-in-columns) + (@gutter-width * (@width-in-columns - 1));
+    
+    float: left;
+    width: (@target-width / @context-width) * 100%;
+}
+
+.right-column (@width-in-columns, @parent-width-in-columns: @number-of-columns) {
+    @context-width: (@column-width * @parent-width-in-columns) + (@gutter-width * (@parent-width-in-columns - 1));
+    @target-width: (@column-width * @width-in-columns) + (@gutter-width * (@width-in-columns - 1));
+    
+    float: right;
+    width: (@target-width / @context-width) * 100%;
+}

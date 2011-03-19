@@ -1,0 +1,80 @@
+/* less css tricks
+*******************************************************************************/
+/* This file includes only less variables and mixins. */
+
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.shaped-corners (@hradius: 5px, @vradius: 5px) {
+  border-radius: @hradius e("/") @vradius;
+  -webkit-border-radius: @hradius @vradius;
+  -moz-border-radius: @hradius e("/") @vradius;
+}
+
+.box-shadow (@hoff: @1px, @voff: @1px, @blur: @2px, @color: rgba(0,0,0,0.2)) {
+  box-shadow: @hoff @voff @blur @color;
+  -webkit-box-shadow: @hoff @voff @blur @color;
+  -moz-box-shadow: @hoff @voff @blur @color;
+}
+
+.box-shadow-with-inset (@hoff: @1px, @voff: @1px, @blur: @2px, @color: rgba(0,0,0,0.2), @ihoff: @1px, @ivoff: @1px, @iblur: @2px, @icolor: rgba(255,255,255,0.2)) {
+  box-shadow: @hoff @voff @blur @color, @ihoff @ivoff @iblur @icolor inset;
+  -webkit-box-shadow: @hoff @voff @blur @color, @ihoff @ivoff @iblur @icolor inset;
+  -moz-box-shadow: @hoff @voff @blur @color, @ihoff @ivoff @iblur @icolor inset;
+}
+
+.gradient-background (@light: rgba(229, 255, 174, 1), @dark: rgba(43, 182, 0, 1)) {
+  background-image: -moz-linear-gradient(top, @light + rgba(0, 0, 0, 0.6) 0%, @dark + rgba(0, 0, 0, 0.8) 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@light + rgba(0, 0, 0, 0.6)), to(@dark + rgba(0, 0, 0, 0.8)));
+}
+
+/* button generator
+*******************************************************************************/
+
+.button-template(@base-color: #599233, @size: 0.875, @text-color: #EEE) {
+
+  @default-font-size: @size * 16;
+  @1px: 1em / @default-font-size;
+  @gradient-dark-color: @base-color;
+  @gradient-light-color: spin(lighten(@base-color, 10%), -8%); 
+  @border-color: lighten(@base-color, 5%);
+  
+  font-size: @size * 1em;
+  background: @gradient-dark-color;
+  .gradient-background(@gradient-light-color, @gradient-dark-color);
+  border: @1px solid @border-color;
+  border-top-color: @gradient-light-color;
+  border-bottom-color: @gradient-dark-color;
+  border-left-color: @border-color;
+  border-right-color: @border-color;
+  .shaped-corners((4 * @1px * @size),(5 * @1px * @size));
+  .box-shadow-with-inset((1* @1px),(1* @1px),(2 * @1px),rgba(0,0,0,0.2),(1* @1px),(1* @1px),(3 * @1px),rgba(255,255,255,0.4));
+  color: @text-color;
+  font-weight: bold;
+  line-height: 180%;
+  padding: (@1px * 3 * @size) (@1px * 8 * @size);
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.2) (1* @1px) (1* @1px) (3 * @1px);
+  -webkit-transition-property: background-image, -webkit-box-shadow, text-shadow, color, border-bottom-color, border-top-color;
+  -webkit-transition-duration: 50ms;
+  -webkit-font-smoothing: antialiased;
+  
+  &:hover {
+    cursor: pointer;
+    .box-shadow-with-inset(@1px,@1px,(2 * @1px),rgba(0,0,0,0.2),@1px,@1px,(4 * @1px),rgba(255,255,255,0.5));
+  }
+  
+  &:active {
+    cursor: pointer;
+    .gradient-background(@gradient-dark-color, @gradient-light-color);
+    .box-shadow-with-inset(0,0,(2 * @1px),rgba(255,255,255,0.6),0,0,(4 * @1px),rgba(0,0,0,0.4));
+    text-shadow: rgba(255,255,255,0.2) (-1 * @1px) (-1 * @1px) (2 * @1px);
+    color: darken(@text-color, 3%);
+    border-top-color: @gradient-dark-color;
+    border-bottom-color: @gradient-light-color;
+  }
+  
+}
