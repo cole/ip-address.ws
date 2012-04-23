@@ -5,12 +5,9 @@
 */
 
 define("VERSION","0.7");
-define("DEBUG",false);
 
-if (DEBUG) {
-    require 'includes/timer.php';
-    $timer = new Timer();
-}
+require 'includes/timer.php';
+$timer = new Timer();
 
 require 'includes/router.php';
 require 'includes/strings.php';
@@ -45,13 +42,15 @@ if (isset($_SERVER['HTTP_USER_AGENT']))
 if (isset($_SERVER['HTTP_HOST']))
     $router->template_vars["host"] = $_SERVER['HTTP_HOST'];
 
-$i18n = new Strings($router->query_vars['lang'], $router->template_vars['language'], true);
+$lang = (isset($router->query_vars['lang'])) ? $router->query_vars['lang'] : '';
+
+$i18n = new Strings($lang, $router->template_vars['language'], true);
 
 // Set the language code so we can output it in HTML
 $router->template_vars['langcode'] = $i18n->language_code;
+
+// add timing data
+$router->template_vars['timing'] = $timer->results();
+
 // Render the page, with a callback to flush the translation buffer
 $router->render(array($i18n,'flush'));
-
-if (DEBUG) {
-    echo $timer->results();
-}
