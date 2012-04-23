@@ -71,8 +71,8 @@ class Router {
 
         $this->directory = dirname($path);
         $this->format = pathinfo($path, PATHINFO_EXTENSION);
-        $this->page = basename($path, '.'.$this->format);
-        $this->filepath = $this->directory.$this->page.'.'.$this->format;
+        $this->page = basename($path, '.' . $this->format);
+        $this->filepath = '/' . $this->page . '.' . $this->format;
         $this->content_type = $this->getContentType($this->format);
         
         if (!empty($query)) {
@@ -92,9 +92,8 @@ class Router {
     * @return void
     */
     public function render($callback=null) {
-        
         // 404 if we can't find the template
-        if (!file_exists(dirname(__FILE__).'/../'.Router::$template_path.$this->filepath)) {
+        if (!file_exists(dirname(__FILE__) . '/../' . Router::$template_path . $this->filepath)) {
             header(Router::protocol() . " 404 Not Found", true, 404); 
             $this->format = 'html';
             $this->content_type = $this->getContentType($this->format);
