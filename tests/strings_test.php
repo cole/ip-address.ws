@@ -88,19 +88,19 @@ class StringsTest extends PHPUnit_Framework_TestCase
         $strings = new Strings('es', '', false);
         $raw = "{{_i language}} 1234 {{_i version}} Blah Blah Blah {{_i ip}} {{notme}}";
         $processed = $strings->process($raw);
-        $expected = "Su cadena de aceptar el lenguaje es: 1234 ".VERSION." Blah Blah Blah Su dirección IP es: {{notme}}";
+        $expected = "Su cadena de aceptar el lenguaje es: 1234 " . VERSION . " Blah Blah Blah Su dirección IP es: {{notme}}";
         $this->assertEquals($expected, $processed);
     }
     
     
     public function testOutputBuffering()
     {
+        ob_start();
         $strings = new Strings('en', '', true);
-        $raw = "{{_i browser}}";
-        echo $raw;
+        echo "{{_i browser}}";
+        $strings->flush();
         $processed = ob_get_contents();
-        $expected = utf8_decode('Your browser appears to be:');
-        $this->assertEquals(utf8_encode($expected), utf8_encode($processed));
+        $expected = "Your browser appears to be:";
+        $this->assertEquals($expected, $processed);
     }
-    
 }

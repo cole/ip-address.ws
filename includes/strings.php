@@ -1,5 +1,10 @@
 <?php
 
+// Use UTF-8
+setlocale(LC_ALL, 'en_US.utf-8');
+iconv_set_encoding("internal_encoding", "UTF-8");
+mb_internal_encoding('UTF-8');
+
 /**
 * Strings
 *
@@ -34,7 +39,7 @@ class Strings {
         if (preg_match('/([A-Za-z]{2}|[A-Za-z]{2}-[A-Za-z]{2})/',
             $lang_param)) {
             $this->language_code = $lang_param;
-            }
+        }
         else if (!empty($http_accept_lang)) {
             $parsed_accept_lang = $this->parseAcceptLang($http_accept_lang);
             if (!empty($parsed_accept_lang)) {
@@ -45,8 +50,9 @@ class Strings {
             $this->language_code = Strings::$fallback_language;
         }
         
-        if ($buffer)
+        if ($buffer) {
             $this->buffer();
+        }
         
         $this->loadMessages($this->language_code);
     }
