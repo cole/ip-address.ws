@@ -26,7 +26,7 @@ class Router {
     public $query_vars = array();
     public $content_type;
     public $rendered = false;
-    public $template_vars;
+    public $template_vars = array();
     
     /**
     * protocol
@@ -152,7 +152,7 @@ class Router {
     * @param string $extension File extension
     * @return string
     */
-    private function getContentType($extension)
+    public function getContentType($extension='')
     {
         switch ($extension)
         {
@@ -176,7 +176,13 @@ class Router {
     {
         preg_match_all('/(\{\{(\w+)\}\})/i',$output,$template_vars_to_replace);
         foreach ($template_vars_to_replace[2] as $key) {
-            $output = preg_replace('/(\{\{'.$key.'\}\})/i',$this->template_vars[$key],$output);
+            if (array_key_exists($key, $this->template_vars)) {
+                $replacement = $this->template_vars[$key];
+            }
+            else {
+                $replacement = '';
+            }
+            $output = preg_replace('/(\{\{'.$key.'\}\})/i',$replacement,$output);
         }
         
         return $output;
