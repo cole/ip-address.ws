@@ -1,20 +1,20 @@
 /**
- * HTML5 ✰ Boilerplate
- *
- * base.less contains a reset, font normalization and some base styles.
- *
- * Credit is left where credit is due.
- * Much inspiration was taken from these projects:
- * - yui.yahooapis.com/2.8.1/build/base/base.css
- * - camendesign.com/design/
- * - praegnanz.de/weblog/htmlcssjs-kickstart
- */
+* HTML5 ✰ Boilerplate
+*
+* base.less contains a reset, font normalization and some base styles.
+*
+* Credit is left where credit is due.
+* Much inspiration was taken from these projects:
+* - yui.yahooapis.com/2.8.1/build/base/base.css
+* - camendesign.com/design/
+* - praegnanz.de/weblog/htmlcssjs-kickstart
+*/
 
 /**
- * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
- * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
- * html5doctor.com/html-5-reset-stylesheet/
- */
+* html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+* v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+* html5doctor.com/html-5-reset-stylesheet/
+*/
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -59,27 +59,28 @@ input, select { vertical-align: middle; }
 
 
 /**
- * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
- */
+* Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
+*/
 
-body { font-size: 100%;
-       line-height: (@default-line-height / @default-font-size * 1em); 
-       *font-size: small;
+body {
+  font-size: 100%;
+  line-height: (@default-line-height / @default-font-size * 1em); 
+  *font-size: small;
 } /* Hack retained to preserve specificity. */
 
 select, input, textarea, button { font: 99% sans-serif; }
 
 /* Normalize monospace sizing:
-   en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
+en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 
 /**
- * Minimal base styles.
- */
+* Minimal base styles.
+*/
 
 body, select, input, textarea { 
-    color: @main-color;
+  color: @main-color;
 }
 
 /* Headers (h1, h2, etc) have no default font-size or margin. Define those yourself. */
@@ -138,13 +139,13 @@ button, input, select, textarea { margin: 0; }
 /* Colors for form validity. */
 input:valid, textarea:valid   {  }
 input:invalid, textarea:invalid {
-      border-radius: 1px; -moz-box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color; -webkit-box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color; box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color;
+  border-radius: 1px; -moz-box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color; -webkit-box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color; box-shadow: 0 0 (5 * @1px) @invalid-input-glow-color;
 }
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: @invaild-input-background-color; }
 
 /* These selection declarations have to be separate.
- * No text-shadow: twitter.com/miketaylr/status/12228805301
- */
+* No text-shadow: twitter.com/miketaylr/status/12228805301
+*/
 ::-moz-selection{ background: @select-background-color; color: @select-color; text-shadow: none; }
 ::selection { background: @select-background-color; color: @select-color; text-shadow: none; }
 
@@ -152,9 +153,9 @@ input:invalid, textarea:invalid {
 a:link { -webkit-tap-highlight-color: @select-background-color; }
 
 /* Make buttons play nice in IE:
-   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
 button {  width: auto; overflow: visible; }
 
 /* Bicubic resizing for non-native sized IMG:
-   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
 .ie7 img { -ms-interpolation-mode: bicubic; }

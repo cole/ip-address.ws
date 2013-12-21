@@ -1,24 +1,21 @@
 /* This file contains site specific styles */
 
-body { background-color: @body-background-color; }
+body {
+  background-color: @body-background-color;
+}
 
-.box { color: @main-color;
+.box {
+  color: @main-color;
   .top-level(2,5);
   margin-top: (100 * @1px);
   padding: (10 * @1px) (5 * @1px);
-  background-color: @body-background-color;
-  .gradient-background(@gradient-start-color, @gradient-end-color);
-  border: (2 * @1px) solid @main-color;
-  .rounded-corners(10 * @1px);
-  .box-shadow-with-inset(0, 0, (3 * @1px), @text-shadow-color, (1 * @1px), (1 * @1px), (40 * @1px), @inset-shadow-color);
 }
 
 .preamble {
-    .left-column(4,5);
-    padding-left: 1em;
+  .left-column(4,5);
+  padding-left: 1em;
 }
 
 .data {    
-    .right-column(5,5);
-    
+  .right-column(5,5);
 }
