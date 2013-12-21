@@ -1,118 +1,118 @@
 /**
- * Media queries for responsive design.
- *
- * These follow after primary styles so they will successfully override.
- */
+* Media queries for responsive design.
+*
+* These follow after primary styles so they will successfully override.
+*/
 
 /* Style adjustments for portrait mode goes here.
 @media all and (orientation:portrait) { }
- */
+*/
 
 
 /* Style adjustments for landscape mode goes here. 
 @media all and (orientation:landscape) { }
- */
+*/
  
 /* For the iPad 
 @media only screen and (max-device-width: 1024px) and (orientation:portrait) { }
 
 @media only screen and (max-device-width: 1024px) and (orientation:landscape) { }
- */
+*/
  
 @media screen and (min-width: 1200px) { 
-    @column-width: 160; /* pixels */
-    @gutter-width: 20; /* pixels */
-    @number-of-columns: 7;
-    @page-width: (@column-width * @number-of-columns) + (@gutter-width * (@number-of-columns - 1));
+  @column-width: 160; /* pixels */
+  @gutter-width: 20; /* pixels */
+  @number-of-columns: 7;
+  @page-width: (@column-width * @number-of-columns) + (@gutter-width * (@number-of-columns - 1));
     
-    #page { max-width: @page-width * @1px; }
+  #page { max-width: @page-width * @1px; }
     
-    .preamble { 
-            font-size: 1.5em;
-            line-height: 1.2;
-            .left-column(4,5);
+  .preamble { 
+    font-size: 1.5em;
+    line-height: 1.2;
+    .left-column(4,5);
             
-    }
+  }
 
-    .data { font-size: 6em;
-        line-height: 1.2;
-        .right-column(5,5);
+  .data { font-size: 6em;
+    line-height: 1.2;
+    .right-column(5,5);
         
-    }
+  }
     
-    .box { .top-level(2,5); }
+  .box { .top-level(2,5); }
     
 }
 
  
 @media screen and (max-width: 700px) {
     
-    @column-width: 80; /* pixels */
-    @gutter-width: 20; /* pixels */
-    @number-of-columns: 7;
-    @page-width: (@column-width * @number-of-columns) + (@gutter-width * (@number-of-columns - 1));
+  @column-width: 80; /* pixels */
+  @gutter-width: 20; /* pixels */
+  @number-of-columns: 7;
+  @page-width: (@column-width * @number-of-columns) + (@gutter-width * (@number-of-columns - 1));
     
-    #page { max-width: @page-width * @1px; }
+  #page { max-width: @page-width * @1px; }
     
-    .preamble { 
-            font-size: 1em;
-            line-height: 1.2;
-            .left-column(3,5);
+  .preamble { 
+    font-size: 1em;
+    line-height: 1.2;
+    .left-column(3,5);
             
-    }
+  }
 
-    .data { font-size: 3em;
-        line-height: 1.2;
-        .right-column(5,5);
+  .data { font-size: 3em;
+    line-height: 1.2;
+    .right-column(5,5);
         
-    }
+  }
     
-    .box { .top-level(2,5);
-      margin-top: (40 * @1px);
-      padding: (7 * @1px) (3 * @1px);
-    }
+  .box { .top-level(2,5);
+    margin-top: (40 * @1px);
+    padding: (7 * @1px) (3 * @1px);
+  }
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
-   consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) { 
 
-    body {
-        background-color: @gradient-start-color;        
-    }
+  body {
+    background-color: @gradient-start-color;        
+  }
     
-    #page {
-        margin: 0;
-        padding: 0;
-        max-width: 320px;
+  #page {
+    margin: 0;
+    padding: 0;
+    max-width: 320px;
         
-    }
+  }
     
-    .box { width: 100%;
-        height: 100%;
-        margin: 0;
-        padding-top: 1em;
-        border: none;
-        background: transparent;
-        background-image: none;
-        .rounded-corners(0);     
-        .box-shadow(0, 0, 0, @text-shadow-color);
+  .box { width: 100%;
+    height: 100%;
+    margin: 0;
+    padding-top: 1em;
+    border: none;
+    background: transparent;
+    background-image: none;
+    .rounded-corners(0);     
+    .box-shadow(0, 0, 0, @text-shadow-color);
            
-      padding: (7 * @1px) (3 * @1px);
-    }
+    padding: (7 * @1px) (3 * @1px);
+  }
     
-    .preamble { 
-            font-size: 0.8em;
-            line-height: 1.1;
-            width: 100%;         
-    }
+  .preamble { 
+    font-size: 0.8em;
+    line-height: 1.1;
+    width: 100%;         
+  }
 
-    .data { font-size: 1.8em;
-        line-height: 1.1;
-        width: 100%;
+  .data { font-size: 1.8em;
+    line-height: 1.1;
+    width: 100%;
         
-    }
+  }
     
 
-    }
+}
 
